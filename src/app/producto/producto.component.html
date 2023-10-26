@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <h2 class="text-dark mb-4">Productos</h2>
+    <p class="mb-4">Cantidad de productos existentes: {{ producto.length }}</p>
+
+    <div class="mb-3">
+        <button (click)="redirigirAFormulario()" class="btn btn-success">Añadir Nuevo Producto</button>
+        <button (click)="eliminarTodosLosProducto()" class="btn btn-danger  mx-2">Eliminar</button>
+        <button (click)="toggleMostrarProducto()" class="btn btn-secondary">
+            {{ mostrarProducto ? 'Ocultar Productos' : 'Mostrar Productos' }}
+        </button>
+    </div>
+
+    <div *ngIf="mostrarProducto" class="row">
+        <div *ngFor="let producto of producto; let i = index" class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{ producto.nombre }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Precio: {{ producto.duracion }}</h6>
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Cantidad de Unidades: {{producto.cantidad}} </h6>
+                    <button (click)="eliminarProducto(i)" class="btn btn-danger">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario producto -->
+    <h2 class="text-dark mt-4 ">Formulario Nuevo Producto</h2>
+    <form (submit)="agregarProducto()" class="mb-4 " id="formulario">
+        <div class="form-group">
+            <label for="nombreProducto">Nombre del Producto</label>
+            <input type="text" class="form-control" id="nombreProducto" [(ngModel)]="nuevoProducto.nombre" name="nombre"
+                placeholder="Ej. Televisor TCL 32'">
+        </div>
+        <div class="form-group">
+            <label for="duracionProducto">Precio</label>
+            <input type="text" class="form-control" id="duracionProducto" [(ngModel)]="nuevoProducto.duracion"
+                name="duracion" placeholder="Ej. $120.00">
+        </div>
+        <div class="form-group">
+            <label for="descripcionProducto">Descripción</label>
+            <textarea class="form-control" id="descripcionProducto" [(ngModel)]="nuevoProducto.descripcion"
+                name="descripcion" placeholder="Ej. Televisor 32' Android."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="cantidadProducto">Cantidad de Unidades</label>
+            <input type="number" class="form-control" id="cantidadProducto" [(ngModel)]="nuevoProducto.cantidad"
+                name="cantidad" placeholder="Ej. 12">
+        </div>
+        <button type="submit" class="btn btn-primary">Añadir Producto</button>
+    </form>
+</div>
